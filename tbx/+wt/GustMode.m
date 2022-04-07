@@ -1,4 +1,11 @@
 classdef GustMode < uint16
+    % GUSTMODE an enumeration to define the mode of operation of the gust
+    % vanes
+    %
+    % Author:   Fintan Healy  
+    % Email:    fintan.healy@bristol.ac.uk
+    % Date:     07/04/2022
+    
     enumeration
         RandomTurbulence (5)    % between +/- Amplitude
         Chirp (4)               % between +/- Amplitude

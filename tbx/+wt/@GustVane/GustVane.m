@@ -1,6 +1,9 @@
 classdef GustVane
-    %GUSTVANE Summary of this class goes here
-    %   Detailed explanation goes here
+    %GUSTVANE a class to control the gust vanes in the 7x5ft Wt at the UoB
+    %   
+    % Author:   Fintan Healy  
+    % Email:    fintan.healy@bristol.ac.uk
+    % Date:     07/04/2022
 
     properties
         tcp_drive;
@@ -12,9 +15,18 @@ classdef GustVane
             obj.tcp_drive.ByteOrder = "big-endian";
         end
         function t = getRunTimer(obj,duration)
+            % GETRUNTIMER a method to create a timer to control the gust
+            % vanes
+            % t = obj.getRunTimer(3);
+            % t.start();
+            % t.wait();
+
             t = timer;
+            % when timer is started start the drive
             t.StartFcn = @(~,~)obj.startDrive();
+            % at the end of the timer stop the drive
             t.TimerFcn = @(~,~)obj.stopDrive();
+            % timer duration
             t.StartDelay = round(duration,3);
             t.ExecutionMode = 'singleShot';
         end
