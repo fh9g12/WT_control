@@ -8,7 +8,7 @@ Currently the following functionalities are implemented:
 
 ## Remote Overhead Balance Control
 
-Have a look at the OHBControl folder for the code and a detailed documentation.
+Have a look at the [OHBControl](OHBControl) folder for the code and a detailed documentation.
 
 ## Vertical Gust Vanes Control
 
