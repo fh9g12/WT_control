@@ -14,7 +14,12 @@ classdef GustVane
             obj.tcp_drive = tcpclient(ip,port);
             obj.tcp_drive.ByteOrder = "big-endian";
         end
-        function t = getRunTimer(obj,duration)
+        function t = getRunTimer(obj,duration,delay)
+            arguments
+                obj
+                duration
+                delay = 0
+            end
             % GETRUNTIMER a method to create a timer to control the gust
             % vanes
             % t = obj.getRunTimer(3);
@@ -23,12 +28,30 @@ classdef GustVane
 
             t = timer;
             % when timer is started start the drive
-            t.StartFcn = @(~,~)obj.startDrive();
+            t.StartFcn = @(~,~)obj.startFunc(delay);
             % at the end of the timer stop the drive
             t.TimerFcn = @(~,~)obj.stopDrive();
             % timer duration
             t.StartDelay = round(duration,3);
             t.ExecutionMode = 'singleShot';
+        end
+
+        function startFunc(obj,delay)
+            if delay == 0 || length(obj) == 1
+                obj.startDrive();
+            else
+                t = timer;
+                t.StartFcn = @(~,~)obj(1).startDrive();
+                t.TimerFcn = @(~,~)obj(2).startDrive();
+                t.StartDelay = delay;
+                t.ExecutionMode = 'singleShot';
+                start(t);
+%                 wait(t);
+%                 obj(1).startDrive();
+%                 pause(delay);
+%                 obj(2).startDrive();
+            end
+
         end
         function startDrive(obj)
             obj.writeToDrive(1930,1,1);
