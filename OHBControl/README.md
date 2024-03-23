@@ -2,7 +2,7 @@
 
 This project allows remote control of the 7x5 tunnel's overhead balance (OHB) from a local network. Two files are needed for this:
 - A *Python* script `OHBControlServer.py` runs on the balance computer and takes control of the mouse and keyboard to interface with the balance GUI.
-- A *MATLAB* class `OHBControl.m` is used by the user on his personal computer and handles all communications over the local network.
+- A *MATLAB* class `OHBControl.m` is used by the user on his personal computer and handles all communications over the local network. (this is in the folder "..\tbx\+wt\")
 
 ***DISCLAIMER: Any updates or changes to the balance control software through the manufacturer may cause unexpected behaviour of the script. Supervise the balance computer at all times!***
 
@@ -23,7 +23,7 @@ This project allows remote control of the 7x5 tunnel's overhead balance (OHB) fr
 ## *MATLAB* Example
 
 ```
-ohb = OHBControl;
+ohb = wt.OHBControl;
 
 if ~ohb.connect('192.168.1.70')
   disp('Connection failed!')
@@ -104,7 +104,6 @@ end
 
   Read the wind speed value from the OHB UI.
   - `speed`                 The current airspeed value in the high speed test section. Reading it fails sometimes, in this case 'NaN' is returned.
-
 
 - `temp = OHBControl.readTemperature()` 
 
